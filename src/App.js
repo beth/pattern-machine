@@ -2,7 +2,20 @@ import './App.css';
 import { useState } from 'react';
 
 const GRID_SIZE = 9;
-const COLORS = ['green', 'orange', 'purple'];
+const COLORS = [
+  { 
+    className: 'green',
+    emoji: '🟩',
+  },
+  { 
+    className: 'orange',
+    emoji: '🟧',
+  },
+  { 
+    className: 'purple',
+    emoji: '🟪',
+  }
+];
 
 const createInitialState = (num) => {
   const state = [];
@@ -11,6 +24,14 @@ const createInitialState = (num) => {
   }
   return state;
 };
+
+const convertGridToEmojiString = (grid) => {
+  return grid.map(row => {
+    return row.map(value => {
+      return COLORS[value].emoji;
+    }).join('');
+  }).join('\n');
+}
 
 function App() {
   const [grid, setGrid] = useState(createInitialState(GRID_SIZE));
@@ -26,9 +47,29 @@ function App() {
     });
     setGrid(newGrid);
   };
+
+  const shareGrid = () => {
+    const text = convertGridToEmojiString(grid);
+    const data = { text }
+    try {
+      window.navigator.canShare(data);
+      window.navigator.share(data)
+    } catch (e) {
+      navigator.clipboard.writeText(text);
+    }
+  };
+
   return (
     <div className="grid">
+      <h1>PATTERN MACHINE</h1>
       { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
+      <div className="footer">
+        <div>
+          Made with 🤖 by Chris Nho and Beth Johnson
+        </div>
+        <button onClick={shareGrid}>Share</button>
+      </div>
+      
     </div>
   );
 }
@@ -44,7 +85,7 @@ function Square({color, rowIdx, colIdx, onSquareUpdate}) {
     let newColor = (color + 1) % COLORS.length;
     onSquareUpdate(rowIdx, colIdx, newColor);
   }
-  return (<div className={`square ${COLORS[color]}`} onClick={onClick}></div>)
+  return (<div className={`square ${COLORS[color].className}`} onClick={onClick}></div>)
 }
 
 export default App;
