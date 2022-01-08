@@ -1,16 +1,13 @@
 import './App.css';
 import { useState } from 'react';
 
-const GREEN = 0;
-const ORANGE = 1;
-const PURPLE = 2;
-
 const GRID_SIZE = 9;
+const COLORS = ['green', 'orange', 'purple'];
 
 const createInitialState = (num) => {
   const state = [];
   for (let rowIdx = 0; rowIdx < num; rowIdx++) {
-    state.push(Array(num).fill(GREEN));
+    state.push(Array(num).fill(0));
   }
   return state;
 };
@@ -43,19 +40,11 @@ function Row({row, rowIdx, onSquareUpdate}) {
 }
 
 function Square({color, rowIdx, colIdx, onSquareUpdate}) {
-  let classNameColor = '';
-  if (color === GREEN) {
-    classNameColor = 'green';
-  } else if (color === ORANGE) {
-    classNameColor = 'orange';
-  } else if (color === PURPLE) {
-    classNameColor = 'purple';
-  }
   const onClick = () => {
-    let newColor = (color + 1) % 3;
+    let newColor = (color + 1) % COLORS.length;
     onSquareUpdate(rowIdx, colIdx, newColor);
   }
-  return (<div className={`square ${classNameColor}`} onClick={onClick}></div>)
+  return (<div className={`square ${COLORS[color]}`} onClick={onClick}></div>)
 }
 
 export default App;
