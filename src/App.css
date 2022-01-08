@@ -14,5 +14,14 @@
   width: 80px;
   height: 80px;
   border: 8px solid white;
+}
+
+.square.green {
   background-color: palegreen;
+}
+.square.orange {
+  background-color: orange;
+}
+.square.purple {
+  background-color: purple;
 }

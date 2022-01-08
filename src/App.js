@@ -25,13 +25,21 @@ function App() {
 }
 
 function Row({row}) {
-  return <div class="row">
-    {row.map(square => <Square />)}
+  return <div className="row">
+    {row.map(square => <Square color={square}/>)}
   </div>
 }
 
-function Square() {
-  return (<div className="square"></div>)
+function Square({color}) {
+  let classNameColor = '';
+  if (color === GREEN) {
+    classNameColor = 'green';
+  } else if (color === ORANGE) {
+    classNameColor = 'orange';
+  } else if (color === PURPLE) {
+    classNameColor = 'purple';
+  }
+  return (<div className={`square ${classNameColor}`}></div>)
 }
 
 export default App;
