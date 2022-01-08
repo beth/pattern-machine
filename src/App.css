@@ -17,11 +17,11 @@
 }
 
 .square.green {
-  background-color: palegreen;
+  background-color: rgb(55, 199, 55);
 }
 .square.orange {
-  background-color: orange;
+  background-color: rgb(255, 196, 0);
 }
 .square.purple {
-  background-color: purple;
+  background-color: rgb(140, 29, 231);
 }
