@@ -60,16 +60,19 @@ function App() {
   };
 
   return (
-    <div className="grid">
-      <h1>PATTERN MACHINE</h1>
-      { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
-      <div className="footer">
-        <div>
-          Made with 🤖 by Chris Nho and Beth Johnson
-        </div>
+    <div class="app">
+      <div className="sidebar">
+        <h1>PATTERN MACHINE</h1>
         <button onClick={shareGrid}>Share</button>
       </div>
-      
+      <div className="machine">
+        { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
+        <div className="footer">
+          <div>
+            Made with 🤖 by Chris Nho and Beth Johnson
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
