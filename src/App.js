@@ -63,7 +63,8 @@ function App() {
     <div class="app">
       <div className="sidebar">
         <h1>PATTERN MACHINE</h1>
-        <button onClick={shareGrid}>Share</button>
+        <i class="fas fa-cog fa-2x"></i>
+        <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
       </div>
       <div className="machine">
         { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
