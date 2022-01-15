@@ -2,6 +2,9 @@ import './App.css';
 import { useState } from 'react';
 
 const GRID_SIZE = 9;
+const MIN_GRID = 1;
+const MAX_GRID = 15;
+
 const SQUARE_COLORS = [
   { 
     className: 'green',
@@ -19,7 +22,7 @@ const SQUARE_COLORS = [
 
 const EASTER_EGG_COLORS = ['black', ...SQUARE_COLORS.map(color => color.className)];
 
-const createInitialState = (num) => {
+const createNewGrid = (num) => {
   const state = [];
   for (let rowIdx = 0; rowIdx < num; rowIdx++) {
     state.push(Array(num).fill(0));
@@ -60,8 +63,27 @@ function Title() {
   </h1>);
 }
 
+function Settings({incrementGridSize, gridSize}) {
+  return (<div className="settings">
+    Grid Size:
+    <i onClick={() => incrementGridSize(-1)} class={`fas fa-minus-circle ${gridSize === MIN_GRID ? 'disabled' : ''}`}></i>
+    <span class="gridSize">{gridSize}</span>
+    <i onClick={() => incrementGridSize(1)} class={`fas fa-plus-circle ${gridSize === MAX_GRID ? 'disabled' : ''}`}></i>
+  </div>);
+}
+
 function App() {
-  const [grid, setGrid] = useState(createInitialState(GRID_SIZE));
+  const [showSettings, setShowSettings] = useState(false);
+  const [gridSize, setGridSize] = useState(GRID_SIZE);
+  const incrementGridSize = (increment) => {
+    const newGridSize = gridSize + increment;
+    if (newGridSize> MAX_GRID || newGridSize< MIN_GRID) {
+      return;
+    }
+    setGridSize(newGridSize);
+    setGrid(createNewGrid(newGridSize));
+  };
+  const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
   const onSquareUpdate = (clickedRowIdx, clickedColIdx, newValue) => {
     const newGrid = grid.map((row, rowIdx) => {
       return row.map((value, colIdx) => {
@@ -86,12 +108,20 @@ function App() {
     }
   };
 
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
+
   return (
     <div class="app">
       <div className="sidebar">
         <Title />
-        <i class="fas fa-cog fa-2x"></i>
+        <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
         <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+        {showSettings ? <Settings 
+          gridSize={gridSize}
+          incrementGridSize={incrementGridSize}
+        /> : null}
       </div>
       <div className="machine">
         { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
