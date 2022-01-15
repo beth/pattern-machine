@@ -115,21 +115,18 @@ function App() {
   return (
     <div class="app">
       <div className="sidebar">
-        <Title />
-        <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
-        <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
-        {showSettings ? <Settings 
-          gridSize={gridSize}
-          incrementGridSize={incrementGridSize}
-        /> : null}
+        <div class="header">
+          <Title />
+          <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+          <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+          {showSettings ? <Settings 
+            gridSize={gridSize}
+            incrementGridSize={incrementGridSize}
+          /> : null}
+        </div>
       </div>
       <div className="machine">
         { grid.map((row, rowIdx) => <Row row={row} rowIdx={rowIdx} onSquareUpdate={onSquareUpdate} key={rowIdx}/>)}
-        <div className="footer">
-          <div>
-            Made with 🤖 by Chris Nho and Beth Johnson
-          </div>
-        </div>
       </div>
     </div>
   );
