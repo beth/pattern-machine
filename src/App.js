@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 
 const GRID_SIZE = 9;
-const COLORS = [
+const SQUARE_COLORS = [
   { 
     className: 'green',
     emoji: '🟩',
@@ -17,6 +17,8 @@ const COLORS = [
   }
 ];
 
+const EASTER_EGG_COLORS = ['black', ...SQUARE_COLORS.map(color => color.className)];
+
 const createInitialState = (num) => {
   const state = [];
   for (let rowIdx = 0; rowIdx < num; rowIdx++) {
@@ -28,9 +30,34 @@ const createInitialState = (num) => {
 const convertGridToEmojiString = (grid) => {
   return grid.map(row => {
     return row.map(value => {
-      return COLORS[value].emoji;
+      return SQUARE_COLORS[value].emoji;
     }).join('');
   }).join('\n');
+}
+
+function Title() {
+  const title = 'PATTERN MACHINE';
+  const [letters, setLetters] = useState(Array(title.length).fill(0));
+
+  const changeLetter = (index) => {
+    const newValue = (letters[index] + 1) % 4;
+    const newLetters = letters.map((value, i) => {
+      if(i === index) {
+        return newValue;
+      } else {
+        return value;
+      }
+    });
+    setLetters(newLetters);
+  };
+
+  return (<h1 class="title">
+    {
+      title.split('').map((letter, i) => {
+        return (<span onClick={() => changeLetter(i)} className={EASTER_EGG_COLORS[letters[i]]}>{letter}</span>)
+      })
+    }
+  </h1>);
 }
 
 function App() {
@@ -62,7 +89,7 @@ function App() {
   return (
     <div class="app">
       <div className="sidebar">
-        <h1>PATTERN MACHINE</h1>
+        <Title />
         <i class="fas fa-cog fa-2x"></i>
         <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
       </div>
@@ -86,10 +113,10 @@ function Row({row, rowIdx, onSquareUpdate}) {
 
 function Square({color, rowIdx, colIdx, onSquareUpdate}) {
   const onClick = () => {
-    let newColor = (color + 1) % COLORS.length;
+    let newColor = (color + 1) % SQUARE_COLORS.length;
     onSquareUpdate(rowIdx, colIdx, newColor);
   }
-  return (<div className={`square ${COLORS[color].className}`} onClick={onClick}></div>)
+  return (<div className={`square ${SQUARE_COLORS[color].className}`} onClick={onClick}></div>)
 }
 
 export default App;

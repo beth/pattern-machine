@@ -50,6 +50,19 @@ h1 {
   background-color: rgb(140, 29, 231);
 }
 
+.title {
+  user-select: none;
+}
+.title .green {
+  color: rgb(55, 199, 55);
+}
+.title .orange {
+  color: rgb(255, 196, 0);
+}
+.title .purple {
+  color: rgb(140, 29, 231);
+}
+
 button {
   height: 40px;
   width: 140px;
