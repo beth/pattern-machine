@@ -5,7 +5,7 @@ h1 {
 
 .app {
   display: grid;
-  grid-template-columns: 350px auto;
+  grid-template-columns: 330px auto;
 }
 
 .sidebar {
@@ -17,8 +17,8 @@ h1 {
 }
 
 .machine {
-  height: 900px;
-  width: 900px;
+  height: 1000px;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   margin-top: 50px;
@@ -124,7 +124,18 @@ i.selected {
   max-height: 60px ;                    
 }    
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 1500px) and (min-width: 1101px) {
+  .machine {
+    height: 700px;
+    width: 700px;
+  }
+
+  .square {
+    border: 5px solid white;
+  }
+}
+
+@media screen and (max-width: 1100px) {
   .machine {
     height: 300px;
     width: 300px;
