@@ -12,8 +12,8 @@ const SQUARE_COLORS = [
     emoji: '🟩',
   },
   { 
-    className: 'orange',
-    emoji: '🟧',
+    className: 'yellow',
+    emoji: '🟨',
   },
   { 
     className: 'purple',
