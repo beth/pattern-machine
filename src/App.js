@@ -4,6 +4,7 @@ import { useState } from 'react';
 const GRID_SIZE = 9;
 const MIN_GRID = 1;
 const MAX_GRID = 15;
+const MESSAGE_DELAY = 1000;
 
 const SQUARE_COLORS = [
   { 
@@ -72,9 +73,20 @@ function Settings({incrementGridSize, gridSize, open}) {
   </div>);
 }
 
+function Message({showMessage}) {
+  return <div className={`message ${showMessage ? 'slideright' : 'slideleft'}`}>Pattern Copied!</div>
+}
+
 function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [gridSize, setGridSize] = useState(GRID_SIZE);
+  const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
+  const [showMessage, setShowMessage] = useState(false);
+
+  const onShowMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), MESSAGE_DELAY);
+  }
   const incrementGridSize = (increment) => {
     const newGridSize = gridSize + increment;
     if (newGridSize> MAX_GRID || newGridSize< MIN_GRID) {
@@ -83,7 +95,6 @@ function App() {
     setGridSize(newGridSize);
     setGrid(createNewGrid(newGridSize));
   };
-  const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
   const onSquareUpdate = (clickedRowIdx, clickedColIdx, newValue) => {
     const newGrid = grid.map((row, rowIdx) => {
       return row.map((value, colIdx) => {
@@ -105,6 +116,7 @@ function App() {
       window.navigator.share(data)
     } catch (e) {
       navigator.clipboard.writeText(text);
+      onShowMessage();
     }
   };
 
@@ -117,8 +129,11 @@ function App() {
       <div className="sidebar">
         <div class="header">
           <Title />
-          <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
-          <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+          <div class="buttons">
+            <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+            <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+            <Message showMessage={showMessage}/>
+          </div>
           <Settings 
             gridSize={gridSize}
             incrementGridSize={incrementGridSize}

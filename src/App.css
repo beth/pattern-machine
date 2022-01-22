@@ -112,7 +112,7 @@ i.selected {
 }
 
 .slideup, .slidedown {
-  max-height: 0;            
+  max-height: 0;
   overflow-y: hidden;
   -webkit-transition: max-height 0.3s ease-in-out;
   -moz-transition: max-height 0.3s ease-in-out;
@@ -120,9 +120,29 @@ i.selected {
   transition: max-height 0.3s ease-in-out;
 }
 
-.slidedown {            
-  max-height: 60px ;                    
-}    
+.slidedown {
+  max-height: 60px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.message {
+  margin-left: 5px;
+  display: inline-block;
+  color: rgb(55, 199, 55);
+}
+
+.slideleft {
+  visibility: hidden;
+  /* TODO:(chris) add animation */
+}
+
+.slideright {
+  /* TODO:(chris) add animation */
+}
 
 @media screen and (max-width: 1500px) and (min-width: 1101px) {
   .machine {
