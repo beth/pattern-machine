@@ -63,8 +63,8 @@ function Title() {
   </h1>);
 }
 
-function Settings({incrementGridSize, gridSize}) {
-  return (<div className="settings">
+function Settings({incrementGridSize, gridSize, open}) {
+  return (<div className={`settings ${open ? 'slidedown' : 'slideup'}`}>
     Grid Size:
     <i onClick={() => incrementGridSize(-1)} class={`fas fa-minus-circle ${gridSize === MIN_GRID ? 'disabled' : ''}`}></i>
     <span class="gridSize">{gridSize}</span>
@@ -119,10 +119,11 @@ function App() {
           <Title />
           <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
           <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
-          {showSettings ? <Settings 
+          <Settings 
             gridSize={gridSize}
             incrementGridSize={incrementGridSize}
-          /> : null}
+            open={showSettings}
+          />
         </div>
       </div>
       <div className="machine">

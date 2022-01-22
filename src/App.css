@@ -110,3 +110,45 @@ i.selected {
   width: 20px;
   text-align: center;
 }
+
+.slideup, .slidedown {
+  max-height: 0;            
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.3s ease-in-out;
+  -moz-transition: max-height 0.3s ease-in-out;
+  -o-transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.slidedown {            
+  max-height: 60px ;                    
+}    
+
+@media screen and (max-width: 550px) {
+  .machine {
+    height: 300px;
+    width: 300px;
+  }
+
+  .square {
+    border: 3px solid white;
+  }
+
+  .machine {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15px;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: max-content auto;
+  }
+
+  .sidebar {
+    align-items: center;
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+}
