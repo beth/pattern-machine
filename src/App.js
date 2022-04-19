@@ -13,7 +13,7 @@ const SQUARE_COLORS = [
   },
   { 
     className: 'yellow',
-    emoji: '🟨',
+    emoji: '\ud83d\udfe8',
 
   },
   { 
