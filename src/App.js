@@ -135,15 +135,24 @@ function App() {
     setShowSettings(!showSettings);
   };
 
+  const resetGrid = () => {
+    setGrid(createNewGrid(gridSize));
+  };
+
   return (
     <div class="app">
       <div className="sidebar">
         <div class="header">
           <Title />
           <div class="buttons">
-            <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
-            <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
-            <Message showMessage={showMessage}/>
+            <div class="left-section">
+              <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+              <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+              <Message showMessage={showMessage}/>
+            </div>
+            <div class="right-section">
+              <i onClick={resetGrid} class="fas fa-trash fa-2x"></i>
+            </div>
           </div>
           <Settings 
             gridSize={gridSize}

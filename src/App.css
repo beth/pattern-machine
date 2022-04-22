@@ -127,6 +127,15 @@ i.selected {
 .buttons {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.buttons .fa-trash {
+  margin-right: 7px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
 }
 
 .message {
@@ -191,5 +200,9 @@ i.selected {
     align-items: center;
     margin-left: 0px;
     margin-top: 30px;
+  }
+
+  .buttons .fa-trash {
+    margin-right: 0px;
   }
 }
