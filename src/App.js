@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const GRID_SIZE = 9;
 const MIN_GRID = 1;
@@ -93,6 +93,13 @@ function App() {
   const [gridSize, setGridSize] = useState(GRID_SIZE);
   const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
   const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    if (window.screen.width < 550) {
+      setGridSize(5);
+      setGrid(createNewGrid(5));
+    }
+  }, []);
 
   const onShowMessage = () => {
     setShowMessage(true);
