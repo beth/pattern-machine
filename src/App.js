@@ -24,10 +24,20 @@ const SQUARE_COLORS = [
 
 const EASTER_EGG_COLORS = ['black', ...SQUARE_COLORS.map(color => color.className)];
 
-const createNewGrid = (num) => {
+const createNewGrid = (num, oldGrid) => {
   const state = [];
   for (let rowIdx = 0; rowIdx < num; rowIdx++) {
     state.push(Array(num).fill(0));
+  }
+
+  if (oldGrid) {
+    for (let row = 0; row < num; row++) {
+      for (let col = 0; col < num; col++) {
+        if (oldGrid[row] && oldGrid[row][col] !== undefined) {
+          state[row][col] = oldGrid[row][col];
+        }
+      }
+    }
   }
   return state;
 };
@@ -94,7 +104,7 @@ function App() {
       return;
     }
     setGridSize(newGridSize);
-    setGrid(createNewGrid(newGridSize));
+    setGrid(createNewGrid(newGridSize, grid));
   };
   const onSquareUpdate = (clickedRowIdx, clickedColIdx, newValue) => {
     const newGrid = grid.map((row, rowIdx) => {
