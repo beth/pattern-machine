@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pattern-machine/static/css/main.a433a7b6.css",
-    "main.js": "/pattern-machine/static/js/main.5394e66f.js",
-    "static/js/787.50388c22.chunk.js": "/pattern-machine/static/js/787.50388c22.chunk.js",
-    "index.html": "/pattern-machine/index.html",
-    "main.a433a7b6.css.map": "/pattern-machine/static/css/main.a433a7b6.css.map",
-    "main.5394e66f.js.map": "/pattern-machine/static/js/main.5394e66f.js.map",
-    "787.50388c22.chunk.js.map": "/pattern-machine/static/js/787.50388c22.chunk.js.map"
+    "main.css": "/static/css/main.d4e61e5d.css",
+    "main.js": "/static/js/main.c26be681.js",
+    "static/js/787.50388c22.chunk.js": "/static/js/787.50388c22.chunk.js",
+    "index.html": "/index.html",
+    "main.d4e61e5d.css.map": "/static/css/main.d4e61e5d.css.map",
+    "main.c26be681.js.map": "/static/js/main.c26be681.js.map",
+    "787.50388c22.chunk.js.map": "/static/js/787.50388c22.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a433a7b6.css",
-    "static/js/main.5394e66f.js"
+    "static/css/main.d4e61e5d.css",
+    "static/js/main.c26be681.js"
   ]
 }
