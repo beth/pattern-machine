@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://pattern-machine.com/static/css/main.9bbf2b7f.css",
-    "main.js": "https://pattern-machine.com/static/js/main.6e70a35a.js",
+    "main.js": "https://pattern-machine.com/static/js/main.9508768e.js",
     "static/js/787.50388c22.chunk.js": "https://pattern-machine.com/static/js/787.50388c22.chunk.js",
     "index.html": "https://pattern-machine.com/index.html",
     "main.9bbf2b7f.css.map": "https://pattern-machine.com/static/css/main.9bbf2b7f.css.map",
-    "main.6e70a35a.js.map": "https://pattern-machine.com/static/js/main.6e70a35a.js.map",
+    "main.9508768e.js.map": "https://pattern-machine.com/static/js/main.9508768e.js.map",
     "787.50388c22.chunk.js.map": "https://pattern-machine.com/static/js/787.50388c22.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9bbf2b7f.css",
-    "static/js/main.6e70a35a.js"
+    "static/js/main.9508768e.js"
   ]
 }
