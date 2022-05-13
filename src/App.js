@@ -50,6 +50,14 @@ const convertGridToEmojiString = (grid) => {
   }).join('\n');
 }
 
+const assertCanShare = (data) => {
+  const shareNotEnabled = !window.navigator.canShare(data);
+  const onDesktop = !navigator.userAgentData?.mobile;
+  if (shareNotEnabled || onDesktop) {
+    throw new Error('Sharing not enabled');
+  }
+}
+
 function Title() {
   const title = 'PATTERN MACHINE';
   const [letters, setLetters] = useState(Array(title.length).fill(0));
@@ -130,8 +138,8 @@ function App() {
     const text = convertGridToEmojiString(grid);
     const data = { text }
     try {
-      window.navigator.canShare(data);
-      window.navigator.share(data)
+      assertCanShare(data);
+      window.navigator.share(data);
     } catch (e) {
       navigator.clipboard.writeText(text);
       onShowMessage();
