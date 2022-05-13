@@ -1,23 +1,8 @@
+import { getSquareColors } from "./colors";
+
 export const GRID_SIZE = 9;
 export const MIN_GRID = 1;
 export const MAX_GRID = 15;
-
-export const SQUARE_COLORS = [
-  { 
-    className: 'green',
-    emoji: '🟩',
-  },
-  { 
-    className: 'yellow',
-    emoji: '\ud83d\udfe8',
-  },
-  { 
-    className: 'purple',
-    emoji: '🟪',
-  }
-];
-
-export const EASTER_EGG_COLORS = ['black', ...SQUARE_COLORS.map(color => color.className)];
 
 export const createNewGrid = (num, oldGrid) => {
   const state = [];
@@ -37,10 +22,11 @@ export const createNewGrid = (num, oldGrid) => {
   return state;
 };
 
-export const convertGridToEmojiString = (grid) => {
+export const convertGridToEmojiString = (grid, highContrast) => {
+  const colors = getSquareColors(highContrast);
   return grid.map(row => {
     return row.map(value => {
-      return SQUARE_COLORS[value].emoji;
+      return colors[value].emoji;
     }).join('');
   }).join('\n');
 }

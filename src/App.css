@@ -1,3 +1,15 @@
+:root {
+  --medium-color: rgb(55, 199, 55);
+  --light-color: rgb(255, 196, 0);
+  --dark-color: rgb(140, 29, 231);
+}
+
+:root .high-contrast {
+  --medium-color: rgb(159, 192, 255);
+  --light-color: rgb(255, 152, 90);
+  --dark-color: rgb(51, 51, 51);
+}
+
 /* Reset Styles */
 h1 {
   margin: 0;
@@ -37,28 +49,29 @@ h1 {
   flex-grow: 1;
 }
 
-.square.green {
-  background-color: rgb(55, 199, 55);
+.square.medium {
+  background-color: var(--medium-color);
 }
-.square.yellow {
-  background-color: rgb(255, 196, 0);
+.square.light {
+  background-color: var(--light-color);
 }
-.square.purple {
-  background-color: rgb(140, 29, 231);
+.square.dark {
+  background-color: var(--dark-color);
 }
 
 .title {
   user-select: none;
 }
-.title .green {
-  color: rgb(55, 199, 55);
+.title .medium {
+  color: var(--medium-color);
 }
-.title .yellow {
-  color: rgb(255, 196, 0);
+.title .light {
+  color: var(--light-color);
 }
-.title .purple {
-  color: rgb(140, 29, 231);
+.title .dark {
+  color: var(--dark-color);
 }
+
 
 button {
   height: 40px;
@@ -81,15 +94,15 @@ i {
 }
 
 i:hover {
-  color: rgb(55, 199, 55);
+  color: var(--medium-color);
 }
 
 i:active {
-  color: rgb(255, 196, 0);
+  color: var(--light-color);
 }
 
 i.selected {
-  color: rgb(140, 29, 231);
+  color: var(--dark-color);
 }
 
 .settings {
@@ -141,7 +154,7 @@ i.selected {
 .message {
   margin-left: 5px;
   display: inline-block;
-  color: rgb(55, 199, 55);
+  color: var(--medium-color);
 }
 
 .slideleft {

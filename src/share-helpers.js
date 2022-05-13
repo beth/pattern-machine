@@ -8,8 +8,8 @@ export const assertCanShare = (data) => {
   }
 }
 
-export const shareGrid = (grid, onCopy) => {
-  const text = convertGridToEmojiString(grid);
+export const shareGrid = (grid, onCopy, highContrast) => {
+  const text = convertGridToEmojiString(grid, highContrast);
   const data = { text };
   try {
     assertCanShare(data);

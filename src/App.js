@@ -11,6 +11,7 @@ import { Title } from './components/title';
 import { Settings } from './components/settings';
 import { Message } from './components/message';
 import { Row } from './components/row';
+import { getEasterEggColors } from './colors';
 
 const MESSAGE_DELAY = 1000;
 
@@ -19,6 +20,7 @@ function App() {
   const [gridSize, setGridSize] = useState(GRID_SIZE);
   const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
   const [showMessage, setShowMessage] = useState(false);
+  const [highContrast, setHighContrast] = useState(true);
 
   useEffect(() => {
     if (window.screen.width < 550) {
@@ -58,22 +60,27 @@ function App() {
     setShowSettings(!showSettings);
   };
 
+  const toggleHighContrast = () => {
+    setHighContrast(!highContrast);
+  };
+
   const resetGrid = () => {
     setGrid(createNewGrid(gridSize));
   };
 
   const onShareGrid = () => {
-    shareGrid(grid, onCopy);
+    shareGrid(grid, onCopy, highContrast);
   }
 
   return (
-    <div class="app">
+    <div class={`app ${highContrast ? 'high-contrast' : ''}`}>
       <div className="sidebar">
         <div class="header">
-          <Title />
+          <Title colors={getEasterEggColors(highContrast)}/>
           <div class="buttons">
             <div class="left-section">
-              <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+              <i onClick={toggleSettings} className={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+              <i onClick={toggleHighContrast} class="fas fa-circle-half-stroke fa-2x"></i>
               <i onClick={onShareGrid} class="fas fa-share fa-2x"></i>
               <Message showMessage={showMessage}/>
             </div>

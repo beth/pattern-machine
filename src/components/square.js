@@ -1,4 +1,4 @@
-import { SQUARE_COLORS } from "../grid-helpers";
+import { SQUARE_COLORS } from "../colors";
 
 export function Square({color, rowIdx, colIdx, onSquareUpdate}) {
   const onClick = () => {
