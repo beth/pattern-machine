@@ -2,9 +2,10 @@ import { convertGridToEmojiString } from "./grid-helpers";
 
 export const assertCanShare = (data) => {
   const shareNotEnabled = !window.navigator.canShare(data);
-  const onDesktop = !window.navigator.userAgentData?.mobile;
-  if (shareNotEnabled || onDesktop) {
-      throw new Error('Sharing not enabled');
+  // todo: better detection of desktop
+  // const onDesktop = !window.navigator.userAgentData?.mobile;
+  if (shareNotEnabled) {
+    throw new Error('Sharing not enabled');
   }
 }
 
