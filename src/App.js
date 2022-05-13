@@ -79,7 +79,7 @@ function App() {
           <Title colors={getEasterEggColors(highContrast)}/>
           <div class="buttons">
             <div class="left-section">
-              <i onClick={toggleSettings} className={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
+              <i onClick={toggleSettings} className={`fas fa-border-all fa-2x ${showSettings ? 'selected' : ''}`}></i>
               <i onClick={toggleHighContrast} class="fas fa-circle-half-stroke fa-2x"></i>
               <i onClick={onShareGrid} class="fas fa-share fa-2x"></i>
               <Message showMessage={showMessage}/>
