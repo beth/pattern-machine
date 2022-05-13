@@ -20,7 +20,7 @@ function App() {
   const [gridSize, setGridSize] = useState(GRID_SIZE);
   const [grid, setGrid] = useState(createNewGrid(GRID_SIZE));
   const [showMessage, setShowMessage] = useState(false);
-  const [highContrast, setHighContrast] = useState(true);
+  const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
     if (window.screen.width < 550) {
@@ -73,19 +73,19 @@ function App() {
   }
 
   return (
-    <div class={`app ${highContrast ? 'high-contrast' : ''}`}>
+    <div className={`app ${highContrast ? 'high-contrast' : ''}`}>
       <div className="sidebar">
-        <div class="header">
+        <div className="header">
           <Title colors={getEasterEggColors(highContrast)}/>
-          <div class="buttons">
-            <div class="left-section">
+          <div className="buttons">
+            <div className="left-section">
               <i onClick={toggleSettings} className={`fas fa-border-all fa-2x ${showSettings ? 'selected' : ''}`}></i>
-              <i onClick={toggleHighContrast} class="fas fa-circle-half-stroke fa-2x"></i>
-              <i onClick={onShareGrid} class="fas fa-share fa-2x"></i>
+              <i onClick={toggleHighContrast} className="fas fa-circle-half-stroke fa-2x"></i>
+              <i onClick={onShareGrid} className="fas fa-share fa-2x"></i>
               <Message showMessage={showMessage}/>
             </div>
-            <div class="right-section">
-              <i onClick={resetGrid} class="fas fa-trash fa-2x"></i>
+            <div className="right-section">
+              <i onClick={resetGrid} className="fas fa-trash fa-2x"></i>
             </div>
           </div>
           <Settings 

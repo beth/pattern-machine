@@ -15,10 +15,10 @@ export function Title({ colors }) {
     setLetters(newLetters);
   };
 
-  return (<h1 class="title">
+  return (<h1 className="title">
     {
       title.split('').map((letter, i) => {
-        return (<span onClick={() => changeLetter(i)} className={colors[letters[i]]}>{letter}</span>)
+        return (<span key={i} onClick={() => changeLetter(i)} className={colors[letters[i]]}>{letter}</span>)
       })
     }
   </h1>);
