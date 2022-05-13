@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "PUBLIC_URL='https://pattern-macnine.com/' node scripts/build.js",
+    "build": "PUBLIC_URL='https://pattern-machine.com/' node scripts/build.js",
     "test": "node scripts/test.js",
     "predeploy": "npm run build",
     "deploy": "echo 'pattern-machine.com' > ./build/CNAME && gh-pages -d build"
