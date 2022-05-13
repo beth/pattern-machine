@@ -63,7 +63,7 @@
     "build": "PUBLIC_URL='https://beth.github.io/pattern-machine/' node scripts/build.js",
     "test": "node scripts/test.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "echo 'pattern-machine.com' > ./build/CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -1,100 +1,18 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { 
+  createNewGrid,
+  MIN_GRID,
+  MAX_GRID,
+  GRID_SIZE,
+} from './grid-helpers';
+import { shareGrid } from './share-helpers';
+import { Title } from './components/title';
+import { Settings } from './components/settings';
+import { Message } from './components/message';
+import { Row } from './components/row';
 
-const GRID_SIZE = 9;
-const MIN_GRID = 1;
-const MAX_GRID = 15;
 const MESSAGE_DELAY = 1000;
-
-const SQUARE_COLORS = [
-  { 
-    className: 'green',
-    emoji: '🟩',
-  },
-  { 
-    className: 'yellow',
-    emoji: '\ud83d\udfe8',
-
-  },
-  { 
-    className: 'purple',
-    emoji: '🟪',
-  }
-];
-
-const EASTER_EGG_COLORS = ['black', ...SQUARE_COLORS.map(color => color.className)];
-
-const createNewGrid = (num, oldGrid) => {
-  const state = [];
-  for (let rowIdx = 0; rowIdx < num; rowIdx++) {
-    state.push(Array(num).fill(0));
-  }
-
-  if (oldGrid) {
-    for (let row = 0; row < num; row++) {
-      for (let col = 0; col < num; col++) {
-        if (oldGrid[row] && oldGrid[row][col] !== undefined) {
-          state[row][col] = oldGrid[row][col];
-        }
-      }
-    }
-  }
-  return state;
-};
-
-const convertGridToEmojiString = (grid) => {
-  return grid.map(row => {
-    return row.map(value => {
-      return SQUARE_COLORS[value].emoji;
-    }).join('');
-  }).join('\n');
-}
-
-const assertCanShare = (data) => {
-  const shareNotEnabled = !window.navigator.canShare(data);
-  const onDesktop = !navigator.userAgentData?.mobile;
-  if (shareNotEnabled || onDesktop) {
-    throw new Error('Sharing not enabled');
-  }
-}
-
-function Title() {
-  const title = 'PATTERN MACHINE';
-  const [letters, setLetters] = useState(Array(title.length).fill(0));
-
-  const changeLetter = (index) => {
-    const newValue = (letters[index] + 1) % 4;
-    const newLetters = letters.map((value, i) => {
-      if(i === index) {
-        return newValue;
-      } else {
-        return value;
-      }
-    });
-    setLetters(newLetters);
-  };
-
-  return (<h1 class="title">
-    {
-      title.split('').map((letter, i) => {
-        return (<span onClick={() => changeLetter(i)} className={EASTER_EGG_COLORS[letters[i]]}>{letter}</span>)
-      })
-    }
-  </h1>);
-}
-
-function Settings({incrementGridSize, gridSize, open}) {
-  return (<div className={`settings ${open ? 'slidedown' : 'slideup'}`}>
-    Grid Size:
-    <i onClick={() => incrementGridSize(-1)} class={`fas fa-minus-circle ${gridSize === MIN_GRID ? 'disabled' : ''}`}></i>
-    <span class="gridSize">{gridSize}</span>
-    <i onClick={() => incrementGridSize(1)} class={`fas fa-plus-circle ${gridSize === MAX_GRID ? 'disabled' : ''}`}></i>
-  </div>);
-}
-
-function Message({showMessage}) {
-  return <div className={`message ${showMessage ? 'slideright' : 'slideleft'}`}>Pattern Copied!</div>
-}
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
@@ -109,10 +27,11 @@ function App() {
     }
   }, []);
 
-  const onShowMessage = () => {
+  const onCopy = () => {
     setShowMessage(true);
     setTimeout(() => setShowMessage(false), MESSAGE_DELAY);
   }
+
   const incrementGridSize = (increment) => {
     const newGridSize = gridSize + increment;
     if (newGridSize> MAX_GRID || newGridSize< MIN_GRID) {
@@ -121,6 +40,7 @@ function App() {
     setGridSize(newGridSize);
     setGrid(createNewGrid(newGridSize, grid));
   };
+
   const onSquareUpdate = (clickedRowIdx, clickedColIdx, newValue) => {
     const newGrid = grid.map((row, rowIdx) => {
       return row.map((value, colIdx) => {
@@ -134,18 +54,6 @@ function App() {
     setGrid(newGrid);
   };
 
-  const shareGrid = () => {
-    const text = convertGridToEmojiString(grid);
-    const data = { text }
-    try {
-      assertCanShare(data);
-      window.navigator.share(data);
-    } catch (e) {
-      navigator.clipboard.writeText(text);
-      onShowMessage();
-    }
-  };
-
   const toggleSettings = () => {
     setShowSettings(!showSettings);
   };
@@ -153,6 +61,10 @@ function App() {
   const resetGrid = () => {
     setGrid(createNewGrid(gridSize));
   };
+
+  const onShareGrid = () => {
+    shareGrid(grid, onCopy);
+  }
 
   return (
     <div class="app">
@@ -162,7 +74,7 @@ function App() {
           <div class="buttons">
             <div class="left-section">
               <i onClick={toggleSettings} class={`fas fa-cog fa-2x ${showSettings ? 'selected' : ''}`}></i>
-              <i onClick={shareGrid} class="fas fa-share fa-2x"></i>
+              <i onClick={onShareGrid} class="fas fa-share fa-2x"></i>
               <Message showMessage={showMessage}/>
             </div>
             <div class="right-section">
@@ -181,20 +93,6 @@ function App() {
       </div>
     </div>
   );
-}
-
-function Row({row, rowIdx, onSquareUpdate}) {
-  return <div className="row">
-    {row.map((square, colIdx) => <Square color={square} rowIdx={rowIdx} colIdx={colIdx} onSquareUpdate={onSquareUpdate} key={colIdx}/>)}
-  </div>
-}
-
-function Square({color, rowIdx, colIdx, onSquareUpdate}) {
-  const onClick = () => {
-    let newColor = (color + 1) % SQUARE_COLORS.length;
-    onSquareUpdate(rowIdx, colIdx, newColor);
-  }
-  return (<div className={`square ${SQUARE_COLORS[color].className}`} onClick={onClick}></div>)
 }
 
 export default App;
